@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+# Client Deployment NODE with 3 replicas
+# Each container has label of component: web
+metadata:
+  name: client-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: web
+# Use Following Template for each container
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: sazzadk/complex-client
+          ports:
+            - containerPort: 3000

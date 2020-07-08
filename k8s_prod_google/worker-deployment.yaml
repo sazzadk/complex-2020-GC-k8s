@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+# Worker Deployment NODE with 1 replicas
+# Each container has label of component: worker
+# This node does not need any port as its called by the server process
+# it connects to Redis and Progresql
+# This does not need a service file for ports.
+metadata:
+  name: worker-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: worker
+# Use Following Template for each container
+  template:
+    metadata:
+      labels:
+        component: worker
+    spec:
+      containers:
+        - name: worker
+          image: sazzadk/complex-worker
+          env:
+            - name: REDIS_HOST
+              value: redis-cluster-ip-service
+            - name: REDIS_PORT
+              value: '6379'
