@@ -10,7 +10,7 @@ docker push sazzadk/complex-client:$SHA
 docker push sazzadk/complex-server:$SHA
 docker push sazzadk/complex-worker:$SHA
 
-kubectl apply -f k8s
+kubectl apply -f k8s_prod_google
 kubectl set image deployments/server-deployment server=sazzadk/complex-server:$SHA
 kubectl set image deployments/client-deployment client=sazzadk/complex-client:$SHA
 kubectl set image deployments/worker-deployment worker=sazzadk/complex-worker:$SHA
